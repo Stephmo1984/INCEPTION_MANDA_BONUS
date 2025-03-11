@@ -1,0 +1,34 @@
+version: '3'
+
+services:
+
+ nginx:
+  container_name: nginx
+  build:
+   context: ./requirements/nginx
+   dockerfile: Dockerfile
+  ports:
+   - 443:443
+  volumes:
+   - wordpress:/var/www/wordpress
+  networks:
+   - inception
+  restart: always
+
+ wordpress:
+  container_name: wordpress
+  build:
+   context: ./requirements/wordpress
+   dockerfile: Dockerfile
+  volumes:
+   - wordpress:/var/www/wordpress
+  networks:
+   - inception
+  restart: always
+
+networks:
+ inception:
+  driver: bridge
+
+volumes:
+ wordpress:
