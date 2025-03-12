@@ -27,6 +27,18 @@ RUN sed -i 's/listen = .*/listen = 9000/' /etc/php/7.3/fpm/pool.d/www.conf
 # Create the folder to enable php start
 RUN mkdir -p /run/php
 
+# Install Wordpress CLI to configure Wordpress site and create users in the script
+RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+RUN chmod +x wp-cli.phar
+RUN mv wp-cli.phar /usr/local/bin/wp
+
+# Copy the script to update wordpress config file
+COPY ./tools/update-wp-config.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/update-wp-config.sh
+
+# Launch the script at entry point to update wordpress config file
+ENTRYPOINT ["/usr/local/bin/update-wp-config.sh"]
+
 # Expose the port
 EXPOSE 9000
 
