@@ -20,6 +20,8 @@ clean: stop
 	docker volume prune -f
 	@echo "\n"
 	docker network prune -f
+	@echo "\n"
+	docker volume rm srcs_db srcs_wordpress
 
 re: stop clean build start
 
