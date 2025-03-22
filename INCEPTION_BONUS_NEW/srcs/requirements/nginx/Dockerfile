@@ -15,7 +15,7 @@ RUN rm -f /etc/nginx/nginx.conf
 COPY ./conf/nginx.conf /etc/nginx/nginx.conf
 
 # Create the folder to enable nginx to start
-RUN mkdir -p /run/nginx
+#RUN mkdir -p /run/nginx
 
 # Expose the port
 EXPOSE 443
