@@ -20,8 +20,12 @@ RUN mkdir -p /home/$FTP_USER/wordpress \
     && chmod -R 755 /home/$FTP_USER \
     && chown -R nobody:nogroup /home/$FTP_USER/wordpress
 
+#NEW---
+RUN mkdir -p /var/run/vsftpd/empty && chmod a+rx /var/run/vsftpd/empty
+
 # Lancer le serveur FTP
 ENTRYPOINT ["/usr/local/bin/init-ftp.sh"]
+
 CMD ["/usr/sbin/vsftpd", "/etc/vsftpd.conf"]
 
 

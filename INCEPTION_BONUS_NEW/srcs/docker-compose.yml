@@ -51,11 +51,10 @@ services:
   ports:
     - "21:21"
     - "30000-30009:30000-30009"  # Pour les connexions passives
-  environment:
-    - FTP_USER=${FTP_USER}
-    - FTP_PASS=${FTP_PASS}
+  env_file:
+    - .env
   volumes:
-    - wordpress:/home/${FTP_USER}/wordpress  # Lier au volume de WordPress
+    - wordpress:/home/$FTP_USER/wordpress  # Lier au volume de WordPress
   networks:
     - inception
   restart: always
