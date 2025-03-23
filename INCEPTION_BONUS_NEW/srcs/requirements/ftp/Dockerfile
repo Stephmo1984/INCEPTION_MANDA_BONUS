@@ -1,5 +1,5 @@
 # PULL Debian Buster image
-FROM debian:buster
+FROM debian:bullseye
 
 # Définir le port FTP
 EXPOSE 21 30000-30009

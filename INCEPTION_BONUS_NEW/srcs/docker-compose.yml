@@ -59,31 +59,29 @@ services:
 #     - inception
 #   restart: always
 
- static:
-  build: requirements/static
-  container_name: static
-  build:
-   context: ./requirements/static
-   dockerfile: Dockerfile
-  env_file:
-   - .env
-  ports:
-   - 8080:8080
-  networks:
-   - inception
-  restart: always
-
 #  static:
+#   build: requirements/static
 #   container_name: static
 #   build:
-#     context: ./requirements/static
-#     dockerfile: Dockerfile
+#    context: ./requirements/static
+#    dockerfile: Dockerfile
+#   env_file:
+#    - .env
 #   ports:
-#     - 8080:80  # Expose le site sur le port 8080
-#   volumes:
-#     - ./requirements/static/html:/usr/share/nginx/html:ro  # Volume pour les fichiers HTML
+#    - 8080:8080
 #   networks:
-#     - inception
+#    - inception
+#   restart: always
+
+
+#  redis:
+#   build: requirements/redis
+#   container_name: redis
+#   build:
+#    context: ./requirements/redis
+#    dockerfile: Dockerfile
+#   networks:
+#    - inception
 #   restart: always
 
 networks:

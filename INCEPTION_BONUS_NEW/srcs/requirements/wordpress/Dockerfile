@@ -1,11 +1,11 @@
 # PULL Debian Buster image
-FROM debian:buster
+FROM debian:bullseye
 
 # Install dependencies
 RUN apt -y update \
  && apt -y install wget \
  && apt -y install unzip \
- && apt -y install php7.3 \
+ && apt -y install php7.4 \
  && apt -y install php-fpm \
  && apt -y install php-mysql
 
@@ -22,15 +22,20 @@ RUN unzip latest-fr_FR.zip
 RUN rm -f latest-fr_FR.zip
 
 # Update php-fpm configuration file to listen on port 9000
-RUN sed -i 's/listen = .*/listen = 9000/' /etc/php/7.3/fpm/pool.d/www.conf
+RUN sed -i 's/listen = .*/listen = 9000/' /etc/php/7.4/fpm/pool.d/www.conf
 
 # Create the folder to enable php start
 RUN mkdir -p /run/php
+
+# NEW ---------
+RUN mkdir /usr/sbin/sendmail 
+RUN chmod +xw /usr/sbin/sendmail
 
 # Install Wordpress CLI to configure Wordpress site and create users in the script
 RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 RUN chmod +x wp-cli.phar
 RUN mv wp-cli.phar /usr/local/bin/wp
+
 
 # Copy the script to update wordpress config file
 COPY ./tools/update-wp-config.sh /usr/local/bin/
@@ -43,5 +48,5 @@ ENTRYPOINT ["/usr/local/bin/update-wp-config.sh"]
 EXPOSE 9000
 
 # Run php-fpm command in background
-CMD ["/usr/sbin/php-fpm7.3", "--nodaemonize"]
+CMD ["/usr/sbin/php-fpm7.4", "--nodaemonize"]
 
