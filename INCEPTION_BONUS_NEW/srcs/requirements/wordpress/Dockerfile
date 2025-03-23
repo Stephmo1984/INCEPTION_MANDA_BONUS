@@ -27,9 +27,6 @@ RUN sed -i 's/listen = .*/listen = 9000/' /etc/php/7.4/fpm/pool.d/www.conf
 # Create the folder to enable php start
 RUN mkdir -p /run/php
 
-# NEW ---------
-RUN mkdir /usr/sbin/sendmail 
-RUN chmod +xw /usr/sbin/sendmail
 
 # Install Wordpress CLI to configure Wordpress site and create users in the script
 RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
@@ -46,6 +43,11 @@ ENTRYPOINT ["/usr/local/bin/update-wp-config.sh"]
 
 # Expose the port
 EXPOSE 9000
+
+# ---------- !!! POUR LE BONUS REDIS-CACHE !!! -------------
+##RUN rm ./wordpress/wp-config.php
+#COPY ./tools/wp-config.php ./wordpress/wp-config.php
+# ----------------------------------------------------------
 
 # Run php-fpm command in background
 CMD ["/usr/sbin/php-fpm7.4", "--nodaemonize"]

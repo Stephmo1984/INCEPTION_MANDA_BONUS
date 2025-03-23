@@ -19,4 +19,11 @@ else
 	wp user create $WORDPRESS_USER $WORDPRESS_USER_EMAIL --role=author --user_pass=$WORDPRESS_USER_PASSWORD --allow-root
 fi
 
+# --------- POUR LE BONUS REDIS UNIQUEMENT ------------------------
+# echo "define('WP_CACHE', true);" >> /var/www/html/wp-config.php
+# echo "define('WP_REDIS_HOST', 'redis');" >> /var/www/html/wp-config.php
+# echo "define('WP_REDIS_PORT', 6379);" >> /var/www/html/wp-config.php
+# echo "define('WP_REDIS_DATABASE', 0);" >> /var/www/html/wp-config.php
+# ------------------------------------------------------------------
+
 exec "$@"

@@ -6,9 +6,9 @@ http {
     include /etc/nginx/mime.types;
 
     server {
-        listen 8080;
+        listen 1200;
         root /var/www/html;
-        server_name smortemo.42.fr;
+        server_name _;
         index index.html;
     }
 }

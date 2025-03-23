@@ -30,7 +30,7 @@ else
 fi
 
 # Arrêter le service pour permettre le démarrage avec CMD
-echo "🛑 Stopping MySQL service..."
+echo " Stopping MySQL service..."
 
 mysqladmin shutdown -u root
 #service mysql stop

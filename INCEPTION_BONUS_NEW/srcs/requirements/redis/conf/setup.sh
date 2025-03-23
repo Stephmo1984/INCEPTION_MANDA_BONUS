@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# ressource : 
+# https://gaelbillon.com/installer-et-configurer-redis-pour-wordpress-en-5-minutes/
+
 sed -i 's/bind 127.0.0.1/bind 0.0.0.0/g' /etc/redis/redis.conf
 echo <<EOF > /etc/redis/redis.conf
 maxmemory 256mb
