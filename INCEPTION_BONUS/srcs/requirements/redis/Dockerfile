@@ -29,19 +29,30 @@
 # # Lancer Redis avec la configuration personnalisée
 # ENTRYPOINT [ "redis-server", "/etc/redis/redis.conf" ]
 
+# FROM debian:buster
+
+# RUN apt-get update -y && \
+#     apt-get install -y redis && \
+#     apt-get install -y redis-server
+
+# RUN sed -i 's/# bind 127.0.0.1/bind 0.0.0.0/g' /etc/redis/redis.conf
+# RUN echo 'maxmemory 256mb' >> /etc/redis/redis.conf && \ 
+#    echo 'maxmemory-policy allkeys-lru' >> /etc/redis/redis.conf
+
+
+# RUN echo 'vm.overcommit_memory = 1' >> /etc/sysctl.conf
+
+# EXPOSE 6379
+
+# CMD ["redis-server", "--protected-mode", "no"]
+
 FROM debian:buster
 
-RUN apt-get update -y && \
-    apt-get install -y redis && \
-    apt-get install -y redis-server
+RUN apt-get update && apt-get upgrade -y 
 
-RUN sed -i 's/# bind 127.0.0.1/bind 0.0.0.0/g' /etc/redis/redis.conf
-RUN echo 'maxmemory 256mb' >> /etc/redis/redis.conf && \ 
-   echo 'maxmemory-policy allkeys-lru' >> /etc/redis/redis.conf
+RUN apt install -y vim iputils-ping
 
+RUN apt install -y redis-server
+COPY /conf/redis.conf /etc/redis/
 
-RUN echo 'vm.overcommit_memory = 1' >> /etc/sysctl.conf
-
-EXPOSE 6379
-
-CMD ["redis-server", "--protected-mode", "no"]
+CMD ["redis-server",  "--protected-mode", "no"]

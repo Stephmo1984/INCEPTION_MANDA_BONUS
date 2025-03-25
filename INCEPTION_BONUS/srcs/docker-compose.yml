@@ -43,88 +43,70 @@ services:
    - inception
   restart: always
 
- ftp:
-  container_name: ftp
-  build:
-    context: ./requirements/ftp
-    dockerfile: Dockerfile
-  ports:
-    - "21:21"
-    - "30000-30009:30000-30009"  # Pour les connexions passives
-  env_file:
-    - .env
-  volumes:
-    - wordpress:/home/$FTP_USER/wordpress  # Lier au volume de WordPress
-  networks:
-    - inception
-  restart: always
-
- static:
-  build: requirements/static
-  container_name: static
-  build:
-   context: ./requirements/static
-   dockerfile: Dockerfile
-  env_file:
-   - .env
-  ports:
-   - 1200:1200
-  networks:
-   - inception
-  restart: always
-
- portainer:
-  container_name: portainer
-  image: portainer/portainer-ce:latest
-  restart: always
-  ports:
-    - 9000:9000
-  volumes:
-    - /var/run/docker.sock:/var/run/docker.sock
-    - portainer_data:/data
-  networks:
-    - inception
-
-
-#  redis:
-#   container_name: redis
-#   build:
-#     context: ./requirements/redis
-#     dockerfile: Dockerfile
-#   volumes:
-#     - redis-data:/data
-#   ports:
-#     - 6379:6379
-#   networks:
-#     - inception
-#   restart: always
-
-# volumes:
-#   redis-data:
-#     driver: local
-
-#  redis:
-#   build: requirements/redis
-#   container_name: redis
-#   build:
-#    context: ./requirements/redis
+# ftp:
+#  container_name: ftp
+#  build:
+#    context: ./requirements/ftp
 #    dockerfile: Dockerfile
+#  ports:
+#    - "21:21"
+#    - "30000-30009:30000-30009"  # Pour les connexions passives
+#  env_file:
+#    - .env
+#  volumes:
+#    - wordpress:/home/$FTP_USER/wordpress  # Lier au volume de WordPress
+#  networks:
+#    - inception
+#  restart: always
+
+#  static:
+#   build: requirements/static
+#   container_name: static
+#   build:
+#    context: ./requirements/static
+#    dockerfile: Dockerfile
+#   env_file:
+#    - .env
+#   ports:
+#    - 1200:1200
 #   networks:
 #    - inception
 #   restart: always
 
+#  portainer:
+#   container_name: portainer
+#   image: portainer/portainer-ce:latest
+#   restart: always
+#   ports:
+#     - 9000:9000
+#   volumes:
+#     - /var/run/docker.sock:/var/run/docker.sock
+#     - portainer_data:/data
+#   networks:
+#     - inception
 
- adminer:
-  build: requirements/adminer
-  container_name: adminer
+#  adminer:
+#   build: requirements/adminer
+#   container_name: adminer
+#   build:
+#    context: ./requirements/adminer
+#    dockerfile: Dockerfile
+#   ports:
+#    - 8080:8080
+#   networks:
+#    - inception
+#   restart: always
+
+ redis:  
+  container_name: redis
+  build: requirements/bonus/redis
   build:
-   context: ./requirements/adminer
-   dockerfile: Dockerfile
-  ports:
-   - 8080:8080
+    context: ./requirements/redis
+    dockerfile: Dockerfile
   networks:
-   - inception
+    - inception
   restart: always
+
 
 networks:
  inception:

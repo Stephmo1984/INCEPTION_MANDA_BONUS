@@ -8,6 +8,7 @@ RUN apt -y update \
  && apt -y install php7.4 \
  && apt -y install php-fpm \
  && apt -y install php-mysql
+ 
 
 # Define work directory
 WORKDIR /var/www/

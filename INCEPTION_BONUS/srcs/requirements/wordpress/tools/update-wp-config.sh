@@ -14,12 +14,32 @@ else
 	
 	cd /var/www/wordpress
 	
-	wp core install --url=$DOMAIN_NAME --title=$WORDPRESS_TITLE --admin_user=$WORDPRESS_ADMIN_USER --admin_password=$WORDPRESS_ADMIN_PASSWORD --admin_email=$WORDPRESS_ADMIN_EMAIL --allow-root
+	wp core install --url=$DOMAIN_NAME \
+	--title=$WORDPRESS_TITLE \
+	--admin_user=$WORDPRESS_ADMIN_USER \
+	--admin_password=$WORDPRESS_ADMIN_PASSWORD \
+	--admin_email=$WORDPRESS_ADMIN_EMAIL \
+	--allow-root
 	
-	wp user create $WORDPRESS_USER $WORDPRESS_USER_EMAIL --role=author --user_pass=$WORDPRESS_USER_PASSWORD --allow-root
+	wp user create $WORDPRESS_USER \
+	$WORDPRESS_USER_EMAIL \
+	--role=author \
+	--user_pass=$WORDPRESS_USER_PASSWORD \
+	--allow-root
 fi
 
 # --------- POUR LE BONUS REDIS UNIQUEMENT ------------------------
+
+#wp theme install twentytwentyfour --activate --allow-root
+cd /var/www/wordpress
+
+wp plugin install redis-cache --activate --allow-root
+wp config set WP_REDIS_HOST redis --allow-root
+wp config set WP_REDIS_PORT 6379 --raw --allow-root
+wp redis enable --allow-root
+
+chown -R www-data:www-data /var/www/html
+
 # echo "define('WP_CACHE', true);" >> /var/www/html/wp-config.php
 # echo "define('WP_REDIS_HOST', 'redis');" >> /var/www/html/wp-config.php
 # echo "define('WP_REDIS_PORT', 6379);" >> /var/www/html/wp-config.php
