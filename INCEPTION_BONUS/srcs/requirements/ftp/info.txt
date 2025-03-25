@@ -1,0 +1,38 @@
+
+/!\ Modifier les droits si necessaires pour le volume wordpress
+
+-> ressources https://doc.ubuntu-fr.org/vsftpd
+
+Commandes:
+
+ls -ld /home/smortemo/data/wordpress
+
+--------------------------------------------------------------------------------
+1. POUR QU"ON PUISSE TRANSFERER AVEC FILEZILLA
+
+sudo chown -R 1000:1000 /home/smortemo/data/wordpress
+ou
+sudo chown -R 1000:1000 wp-content/
+
+-> on doit avoir [drwxr-xr-x  5 smortemo   smortemo 4096 Mar 25 13:52 wordpress]
+
+--------------------------------------------------------------------------------
+
+2.POUR QU'ON PUISSE CHANGER DES IMAGES DEPUIS le dossier wp-content
+
+sudo chmod -R 777 /home/smortemo/data/wordpress/wp-content
+
+on doit avoir [drwxrwxrwx 5 smortemo smortemo 4096 Mar 25 14:03 uploads]
+--------------------------------------------------------------------------------
+
+
+sudo chmod -R 755 /home/smortemo/data/wordpress
+
+NON drwxr-xr-x  8 smortemo smortemo  4096 Mar 25 14:27 wp-content
+    drwxr-xr-x  8 smortemo smortemo  4096 Mar 25 14:27 wp-content
+
+NON drwxr-xr-x 3 smortemo smortemo 4096 Mar 25 14:25 uploads
+
+sudo chown -R 1000:1000 /home/smortemo/data/wordpress
+
+
