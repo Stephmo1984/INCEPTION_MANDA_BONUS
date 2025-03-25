@@ -114,17 +114,17 @@ services:
 #   restart: always
 
 
-#  adminer:
-#   build: requirements/adminer
-#   container_name: adminer
-#   build:
-#   context: ./requirements/adminer
-#   dockerfile: Dockerfile
-#   ports:
-#  8080:8080
-#   networks:
-#     - inception
-#   restart: always
+ adminer:
+  build: requirements/adminer
+  container_name: adminer
+  build:
+   context: ./requirements/adminer
+   dockerfile: Dockerfile
+  ports:
+   - 8080:8080
+  networks:
+   - inception
+  restart: always
 
 networks:
  inception:
