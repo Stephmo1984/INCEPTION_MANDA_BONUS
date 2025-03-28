@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "➡️ modify static website nginx.conf "
+
 cat <<EOF > /etc/nginx/nginx.conf
 events {}
 http {
@@ -13,3 +15,5 @@ http {
     }
 }
 EOF
+
+echo "✅ STATIC-WEBSITE"

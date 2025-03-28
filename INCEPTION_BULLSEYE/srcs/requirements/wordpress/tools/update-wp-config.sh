@@ -28,20 +28,20 @@ else
 	--allow-root
 fi
 
-chown root:root /var/www/wordpress/wp-content
+#chown root:root /var/www/wordpress/wp-content
 #chmod -R 775 /var/www/wordpress/wp-content
 
 # --------- POUR LE BONUS REDIS UNIQUEMENT ------------------------
 
 #wp theme install twentytwentyfour --activate --allow-root
-cd /var/www/wordpress
+#cd /var/www/wordpress
 
-wp plugin install redis-cache --activate --allow-root
-wp config set WP_REDIS_HOST redis --allow-root
-wp config set WP_REDIS_PORT 6379 --raw --allow-root
-wp redis enable --allow-root
+#wp plugin install redis-cache --activate --allow-root
+#wp config set WP_REDIS_HOST redis --allow-root
+#wp config set WP_REDIS_PORT 6379 --raw --allow-root
+#wp redis enable --allow-root
 
-chown -R www-data:www-data /var/www/html
+#chown -R www-data:www-data /var/www/html
 
 
 

@@ -4,8 +4,10 @@ sleep 10
 
 if [ -f /var/www/wordpress/wp-config.php ]
 then
-	echo "Worpress config file already exists"
+	echo "✅ Worpress config file already exists"
 else
+	echo "🚧  Modify config wordpress wp-config.php "
+
 	sed -i "s/database_name_here/$MYSQL_DATABASE_NAME/g" /var/www/wordpress/wp-config-sample.php
 	sed -i "s/username_here/$MYSQL_USER_NAME/g" /var/www/wordpress/wp-config-sample.php
 	sed -i "s/password_here/$MYSQL_USER_PASSWORD/g" /var/www/wordpress/wp-config-sample.php
@@ -14,6 +16,7 @@ else
 	
 	cd /var/www/wordpress
 	
+	echo "🚧 Init WordPress with CLI"	
 	wp core install --url=$DOMAIN_NAME \
 	--title=$WORDPRESS_TITLE \
 	--admin_user=$WORDPRESS_ADMIN_USER \
@@ -29,11 +32,10 @@ else
 fi
 
 chown root:root /var/www/wordpress/wp-content
-#chmod -R 775 /var/www/wordpress/wp-content
 
-# --------- POUR LE BONUS REDIS UNIQUEMENT ------------------------
+# --------------- FOR REDIS-CACHE BONUS --------------------------
+echo "🚧 WORDPRESS UPDATE FOR REDIS_CACHE"
 
-#wp theme install twentytwentyfour --activate --allow-root
 cd /var/www/wordpress
 
 wp plugin install redis-cache --activate --allow-root
@@ -43,12 +45,7 @@ wp redis enable --allow-root
 
 chown -R www-data:www-data /var/www/html
 
-
-
-# echo "define('WP_CACHE', true);" >> /var/www/html/wp-config.php
-# echo "define('WP_REDIS_HOST', 'redis');" >> /var/www/html/wp-config.php
-# echo "define('WP_REDIS_PORT', 6379);" >> /var/www/html/wp-config.php
-# echo "define('WP_REDIS_DATABASE', 0);" >> /var/www/html/wp-config.php
+echo "✅ WORDPRESS UPDATED FOR REDIS_CACHE"
 # ------------------------------------------------------------------
 
 exec "$@"

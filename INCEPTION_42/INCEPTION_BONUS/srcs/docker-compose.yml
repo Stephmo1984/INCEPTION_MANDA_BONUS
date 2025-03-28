@@ -21,7 +21,7 @@ services:
    context: ./requirements/mariadb
    dockerfile: Dockerfile
   env_file:
-   - .env
+   - /home/smortemo/Documents/.env
   volumes:
    - db:/var/lib/mysql
   networks:
@@ -36,7 +36,7 @@ services:
    context: ./requirements/wordpress
    dockerfile: Dockerfile
   env_file:
-   - .env
+   - /home/smortemo/Documents/.env
   volumes:
    - wordpress:/var/www/wordpress
   networks:
@@ -52,9 +52,9 @@ services:
     - "21:21"
     - "30000-30009:30000-30009"  # Pour les connexions passives
   env_file:
-    - .env
+    - /home/smortemo/Documents/.env
   volumes:
-    - wordpress:/home/$FTP_USER/wordpress  # Lier au volume de WordPress
+    - wordpress:/home/ftpuser/wordpress  # Lier au volume de WordPress#- wordpress:/home/$FTP_USER/wordpress  # Lier au volume de WordPress
   networks:
     - inception
   restart: always
@@ -66,7 +66,7 @@ services:
    context: ./requirements/static
    dockerfile: Dockerfile
   env_file:
-   - .env
+   - /home/smortemo/Documents/.env
   ports:
    - 1200:1200
   networks:

@@ -1,0 +1,8 @@
+https://www.datanovia.com/en/fr/lessons/fichiers-dinstallation-de-docker-wordpress-exemple-pour-le-developpement-local/
+
+https://gaelbillon.com/installer-et-configurer-redis-pour-wordpress-en-5-minutes/
+
+SELECT user FROM mysql.user;
+SHOW TABLES FROM <database>;
+SHOW DATABASES;
+SHOW GRANTS FOR <user>;

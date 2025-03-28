@@ -1,4 +1,4 @@
-# PULL Debian Buster image
+# PULL Debian image
 FROM debian:bullseye
 
 # Install dependencies
@@ -45,13 +45,5 @@ ENTRYPOINT ["/usr/local/bin/update-wp-config.sh"]
 # Expose the port
 EXPOSE 9000
 
-#RUN chown root:root /var/www/wordpress/wp-content
-#RUN chmod -R 777 /var/www/wordpress/wp-content
-# ---------- !!! POUR LE BONUS REDIS-CACHE !!! -------------
-##RUN rm ./wordpress/wp-config.php
-#COPY ./tools/wp-config.php ./wordpress/wp-config.php
-# ----------------------------------------------------------
-
 # Run php-fpm command in background
 CMD ["/usr/sbin/php-fpm7.4", "--nodaemonize"]
-

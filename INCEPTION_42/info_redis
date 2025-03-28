@@ -1,0 +1,9 @@
+bind 0.0.0.0               # Accepte les connexions externes
+protected-mode no          # (Optionnel) Désactive la protection pour le debug
+port 6379                  # Port par défaut
+tcp-backlog 511
+timeout 300
+daemonize no               # Démarrage en mode foreground (Docker friendly)
+save 900 1                 # Sauvegarde toutes les 900s si 1 clé a changé
+dir /data                  # Répertoire de stockage des données
+dbfilename dump.rdb
